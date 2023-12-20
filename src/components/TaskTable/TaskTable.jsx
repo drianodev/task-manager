@@ -16,7 +16,7 @@ const TaskTable = ({ tasks, handleEditTask, handleMarkAsCompleted, onDelete }) =
   const [taskToDeleteId, setTaskToDeleteId] = useState(null);
 
   const columns = [
-    { title: 'Nome', dataIndex: 'nome', key: 'nome' },
+    { title: 'Título', dataIndex: 'nome', key: 'nome' },
     { title: 'Status', dataIndex: 'status', key: 'status' },
     { 
       title: 'Data', 
@@ -86,7 +86,7 @@ const TaskTable = ({ tasks, handleEditTask, handleMarkAsCompleted, onDelete }) =
       {selectedTaskDetails && (
         <div>
           <h2>Detalhes da Tarefa</h2>
-          <p>Nome: {selectedTaskDetails.nome}</p>
+          <p>Título: {selectedTaskDetails.nome}</p>
           <p>Descrição: {selectedTaskDetails.descricao}</p>
           <p>Status: {selectedTaskDetails.status}</p>
           {selectedTaskDetails.data && (

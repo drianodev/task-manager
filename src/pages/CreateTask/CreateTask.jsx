@@ -65,9 +65,12 @@ const CreateTask = () => {
       style={{ marginTop: '20px' }}
     >
       <Form.Item
-        label="Nome"
+        label="Título"
         name="nome"
-        rules={[{ required: true, message: 'Por favor, insira o nome da tarefa!' }]}
+        rules={[
+          { required: true, message: 'Por favor, insira o nome da tarefa!' },
+          { max: 250, message: 'O título deve ter no máximo 250 caracteres!' },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -75,7 +78,10 @@ const CreateTask = () => {
       <Form.Item
         label="Descrição"
         name="descricao"
-        rules={[{ required: true, message: 'Por favor, insira a descrição da tarefa!' }]}
+        rules={[
+          { required: true, message: 'Por favor, insira a descrição da tarefa!' },
+          { max: 500, message: 'A descrição deve ter no máximo 500 caracteres!' },
+        ]}
       >
         <Input.TextArea autoSize={{ minRows: 3, maxRows: 5 }} />
       </Form.Item>

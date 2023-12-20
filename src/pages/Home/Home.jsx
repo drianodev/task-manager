@@ -12,8 +12,6 @@ const Home = () => {
   const navigate = useNavigate();
   const tasks = useSelector((state) => state.tasks.tasks);
   const deleteSuccess = useSelector((state) => state.tasks.deleteSuccess);
-  console.log('tasks');
-  console.log(tasks);
 
   useEffect(() => {
     dispatch(fetchTasks());

@@ -60,8 +60,9 @@ const CreateTask = () => {
       initialValues={{ status: 'PENDENTE' }}
       onFinish={handleCreateTask}
       onFinishFailed={onFinishFailed}
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 12 }}
+      style={{ marginTop: '20px' }}
     >
       <Form.Item
         label="Nome"
@@ -76,7 +77,7 @@ const CreateTask = () => {
         name="descricao"
         rules={[{ required: true, message: 'Por favor, insira a descrição da tarefa!' }]}
       >
-        <Input.TextArea />
+        <Input.TextArea autoSize={{ minRows: 3, maxRows: 5 }} />
       </Form.Item>
 
       <Form.Item label="Data" name="data">
@@ -98,13 +99,13 @@ const CreateTask = () => {
         <Input type="file" onChange={handleFileChange} accept="image/*" />
       </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit" disabled={submitting}>
-          Salvar Tarefa
+      <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
+        <Button type="default" onClick={handleCancel}>
+          Cancelar
         </Button>
 
-        <Button type="default" onClick={handleCancel} style={{ marginLeft: 8 }}>
-          Cancelar
+        <Button type="primary" htmlType="submit" disabled={submitting} style={{ marginLeft: 8 }}>
+          Salvar Tarefa
         </Button>
       </Form.Item>
     </Form>

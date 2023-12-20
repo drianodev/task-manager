@@ -1,26 +1,27 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from 'antd';
+import Home from './pages/Home/Home';
+import Tasks from './pages/Tasks/Tasks';
+import CreateTask from './pages/CreateTask/CreateTask';
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
+
+const { Content } = Layout;
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    // Substitua a URL pela rota correta do seu backend
-    fetch('http://localhost:8080/tasks')
-      .then(response => response.json())
-      .then(data => setTasks(data))
-      .catch(error => console.error('Erro ao buscar tarefas:', error));
-  }, []); // O segundo argumento [] garante que o efeito ocorra apenas uma vez durante a montagem
 
   return (
-    <div className="App">
-      <h1>Lista de Tarefas</h1>
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id}>{task.nome}</li>
-        ))}
-      </ul>
-    </div>
+    <Layout>
+      <Navbar />
+      <Content>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/tasks' element={<Tasks />} />
+          <Route path='/create-task' element={<CreateTask />} />
+        </Routes>
+      </Content>
+      <Footer />
+    </Layout>
   );
 }
 

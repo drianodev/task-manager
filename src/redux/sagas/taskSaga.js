@@ -1,6 +1,7 @@
 import { put, takeLatest, call, all } from 'redux-saga/effects';
 import { 
   FETCH_TASKS_REQUEST, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE,
+  FETCH_TASK_BY_ID_REQUEST, FETCH_TASK_BY_ID_SUCCESS, FETCH_TASK_BY_ID_FAILURE, 
   DELETE_TASK_REQUEST, DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE,
   ADD_TASK_REQUEST, ADD_TASK_SUCCESS, ADD_TASK_FAILURE, 
   UPDATE_TASK_REQUEST, UPDATE_TASK_SUCCESS, UPDATE_TASK_FAILURE 
@@ -17,6 +18,16 @@ function* fetchTasksSaga() {
   }
 }
 
+// Saga para buscar tarefa por id
+function* fetchTaskByIdSaga(action) {
+  try {
+    const response = yield call(api.get, `/tasks/${action.payload}`);
+    yield put({ type: FETCH_TASK_BY_ID_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: FETCH_TASK_BY_ID_FAILURE, error: error.message });
+  }
+}
+
 // Saga para adicionar tarefa
 function* createTaskSaga(action) {
   try {
@@ -27,8 +38,8 @@ function* createTaskSaga(action) {
   }
 }
 
-// Saga para atualizar tarefa
 function* updateTaskSaga(action) {
+  console.log(action)
   try {
     const response = yield call(api.put, `/tasks/${action.payload.taskId}`, action.payload.task);
     yield put({ type: UPDATE_TASK_SUCCESS, payload: response.data });
@@ -51,6 +62,7 @@ function* deleteTaskSaga(action) {
 function* taskSaga() {
   yield all([
     takeLatest(FETCH_TASKS_REQUEST, fetchTasksSaga),
+    takeLatest(FETCH_TASK_BY_ID_REQUEST, fetchTaskByIdSaga),
     takeLatest(ADD_TASK_REQUEST, createTaskSaga),
     takeLatest(UPDATE_TASK_REQUEST, updateTaskSaga),
     takeLatest(DELETE_TASK_REQUEST, deleteTaskSaga),

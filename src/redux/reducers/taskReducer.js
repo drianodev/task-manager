@@ -1,5 +1,6 @@
 import { 
   FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE,
+  FETCH_TASK_BY_ID_SUCCESS, FETCH_TASK_BY_ID_FAILURE, 
   ADD_TASK_SUCCESS, ADD_TASK_FAILURE, 
   UPDATE_TASK_SUCCESS, UPDATE_TASK_FAILURE,
   DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE
@@ -21,6 +22,16 @@ const taskReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.error
+      };
+    case FETCH_TASK_BY_ID_SUCCESS:
+      return {
+        ...state,
+        task: action.payload,
+      };
+    case FETCH_TASK_BY_ID_FAILURE:
+      return {
+        ...state,
+        error: action.error,
       };
     case ADD_TASK_SUCCESS:
       return {

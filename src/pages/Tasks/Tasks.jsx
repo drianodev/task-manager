@@ -105,7 +105,10 @@ const Tasks = () => {
               setShowDeleteConfirmationModal(true);
             }}
           />
-          <EditOutlined style={{ fontSize: '24px', marginRight: '16px' }} />
+          <EditOutlined
+            style={{ fontSize: '24px', marginRight: '16px' }}
+            onClick={() => handleEditTask(record.id)}
+          />
           <CheckOutlined
             style={{ fontSize: '24px' }}
             onClick={() => handleMarkAsCompleted(record.id)}
@@ -146,6 +149,10 @@ const Tasks = () => {
   const handleDeleteConfirmation = () => {
     dispatch(deleteTask(taskToDeleteId));
     setShowDeleteConfirmationModal(false);
+  };
+
+  const handleEditTask = (taskId) => {
+    navigate(`/tasks/edit/${taskId}`);
   };
 
   const handleMarkAsCompleted = (taskId) => {

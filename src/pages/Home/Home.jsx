@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchTasks, updateTask, deleteTask } from '../../redux/actions/taskActions';
 import { Table, Modal, Typography, Button } from 'antd';
 import {
@@ -15,6 +16,7 @@ const { Title } = Typography;
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const tasks = useSelector((state) => state.tasks.tasks);
   const deleteSuccess = useSelector((state) => state.tasks.deleteSuccess);
   console.log('tasks');
@@ -73,7 +75,10 @@ const Home = () => {
               setShowDeleteConfirmationModal(true);
             }}
           />
-          <EditOutlined style={{ fontSize: '24px', marginRight: '16px' }} />
+          <EditOutlined
+            style={{ fontSize: '24px', marginRight: '16px' }}
+            onClick={() => handleEditTask(record.id)}
+          />
           <CheckOutlined
             style={{ fontSize: '24px' }}
             onClick={() => handleMarkAsCompleted(record.id)}
@@ -109,6 +114,10 @@ const Home = () => {
   const handleDeleteConfirmation = () => {
     dispatch(deleteTask(taskToDeleteId));
     setShowDeleteConfirmationModal(false);
+  };
+
+  const handleEditTask = (taskId) => {
+    navigate(`/tasks/edit/${taskId}`);
   };
 
   const handleMarkAsCompleted = (taskId) => {
